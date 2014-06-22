@@ -260,9 +260,9 @@ public class RankTest {
     @Test
     public void should_compare_full_house() {
         Hand hand1 = new Hand(
-                new Poker(Poker.Kind.SPADE, 1),
-                new Poker(Poker.Kind.HEART, 1),
-                new Poker(Poker.Kind.CLUB, 1),
+                new Poker(Poker.Kind.SPADE, 14),
+                new Poker(Poker.Kind.HEART, 14),
+                new Poker(Poker.Kind.CLUB, 14),
                 new Poker(Poker.Kind.HEART, 7),
                 new Poker(Poker.Kind.HEART, 7)
         );
@@ -280,10 +280,10 @@ public class RankTest {
     @Test
     public void should_compare_four_of_a_kind() {
         Hand hand1 = new Hand(
-                new Poker(Poker.Kind.SPADE, 1),
-                new Poker(Poker.Kind.HEART, 1),
-                new Poker(Poker.Kind.CLUB, 1),
-                new Poker(Poker.Kind.HEART, 1),
+                new Poker(Poker.Kind.SPADE, 14),
+                new Poker(Poker.Kind.HEART, 14),
+                new Poker(Poker.Kind.CLUB, 14),
+                new Poker(Poker.Kind.HEART, 14),
                 new Poker(Poker.Kind.HEART, 7)
         );
         Hand hand2 = new Hand(

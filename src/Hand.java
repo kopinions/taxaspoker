@@ -76,111 +76,25 @@ public class Hand implements Comparable<Hand>{
             }
         }
 
-        if(thisRank==Rank.FULL_HOUSE) {
-            Map<Integer, List<Integer>> collect = pokers.stream().map(p -> p.getNumber()).collect(Collectors.groupingBy(s -> s));
-            Map<Integer, List<Integer>> collect2 = o.getPokers().stream().map(p -> p.getNumber()).collect(Collectors.groupingBy(s -> s));
-            List<Integer> pairs =  collect.keySet().stream()
-                    .sorted((p1, p2) -> collect.get(p1).size() - collect.get(p2).size())
-                    .collect(Collectors.toList());
-            List<Integer> pairs2 = collect2.keySet().stream()
-                    .sorted((p1, p2) -> collect2.get(p1).size() - collect2.get(p2).size())
-                    .collect(Collectors.toList());
-            if (pairs.get(0) == pairs2.get(0)) {
-                return pairs.get(1) - pairs2.get(1);
-            } else {
-                return pairs.get(0) - pairs2.get(0);
-            }
-        }
-        if(thisRank==Rank.FOUR_OF_A_KIND) {
-            Map<Integer, List<Integer>> collect = pokers.stream().map(p -> p.getNumber()).collect(Collectors.groupingBy(s -> s));
-            Map<Integer, List<Integer>> collect2 = o.getPokers().stream().map(p -> p.getNumber()).collect(Collectors.groupingBy(s -> s));
-            List<Integer> pairs =  collect.keySet().stream()
-                    .sorted((p1, p2) -> collect.get(p1).size() - collect.get(p2).size())
-                    .collect(Collectors.toList());
-            List<Integer> pairs2 = collect2.keySet().stream()
-                    .sorted((p1, p2) -> collect2.get(p1).size() - collect2.get(p2).size())
-                    .collect(Collectors.toList());
-            if (pairs.get(0) == pairs2.get(0)) {
-                return pairs.get(1) - pairs2.get(1);
-            } else {
-                return pairs.get(0) - pairs2.get(0);
-            }
-        }
-        if (thisRank == Rank.THREE_OF_A_KIND) {
-            Map<Integer, List<Integer>> collect = pokers.stream().map(p -> p.getNumber()).collect(Collectors.groupingBy(s -> s));
-            Map<Integer, List<Integer>> collect2 = o.getPokers().stream().map(p -> p.getNumber()).collect(Collectors.groupingBy(s -> s));
-            List<Integer> pairs = collect.keySet().stream()
-                    .sorted((p1, p2) -> collect.get(p1).size() - collect.get(p2).size())
-                    .collect(Collectors.toList());
-            List<Integer> pairs2 = collect2.keySet().stream()
-                    .sorted((p1, p2) -> collect2.get(p1).size() - collect2.get(p2).size())
-                    .collect(Collectors.toList());
+        if(thisRank==Rank.FULL_HOUSE || thisRank==Rank.FOUR_OF_A_KIND || thisRank == Rank.THREE_OF_A_KIND || thisRank == Rank.TWO_PAIR || thisRank==Rank.ONE_PAIR) {
+            List<Integer> pairs = getWeightList();
+            List<Integer> pairs2 = o.getWeightList();
 
-            for (int i = 2; i >=0 ; i--) {
-                if (pairs.get(i) > pairs2.get(i)) {
-                    return 1;
-                } else if (pairs.get(i) < pairs2.get(i)) {
-                    return -1;
-                }
-            }
-            return 0;
-        }
-        if(thisRank==Rank.TWO_PAIR) {
-            Map<Integer, List<Integer>> collect = pokers.stream().map(p -> p.getNumber()).collect(Collectors.groupingBy(s -> s));
-            Map<Integer, List<Integer>> collect2 = o.getPokers().stream().map(p -> p.getNumber()).collect(Collectors.groupingBy(s -> s));
-            List<Integer> pairs =  collect.keySet().stream()
-                    .sorted((p1, p2) -> collect.get(p1).size() - collect.get(p2).size())
-                    .collect(Collectors.toList());
-            List<Integer> pairs2 = collect2.keySet().stream()
-                    .sorted((p1, p2) -> collect2.get(p1).size() - collect2.get(p2).size())
-                    .collect(Collectors.toList());
-            for (int i=2; i >= 0; i--) {
-                if (pairs.get(i) > pairs2.get(i)) {
-                    return 1;
-                } else if (pairs.get(i) < pairs2.get(i)) {
-                    return -1;
-                }
-            }
-            return 0;
-        }
-        if(thisRank==Rank.TWO_PAIR) {
-            Map<Integer, List<Integer>> collect = pokers.stream().map(p -> p.getNumber()).collect(Collectors.groupingBy(s -> s));
-            Map<Integer, List<Integer>> collect2 = o.getPokers().stream().map(p -> p.getNumber()).collect(Collectors.groupingBy(s -> s));
-            List<Integer> pairs =  collect.keySet().stream()
-                    .sorted((p1, p2) -> collect.get(p1).size() - collect.get(p2).size())
-                    .collect(Collectors.toList());
-            List<Integer> pairs2 = collect2.keySet().stream()
-                    .sorted((p1, p2) -> collect2.get(p1).size() - collect2.get(p2).size())
-                    .collect(Collectors.toList());
-            for (int i=2; i >=0; i--) {
-                if (pairs.get(i) > pairs2.get(i)) {
-                    return 1;
-                } else if (pairs.get(i) < pairs2.get(i)) {
-                    return -1;
-                }
-            }
-            return 0;
-        }
-
-        if(thisRank==Rank.ONE_PAIR) {
-            Map<Integer, List<Integer>> collect = pokers.stream().map(p -> p.getNumber()).collect(Collectors.groupingBy(s -> s));
-            Map<Integer, List<Integer>> collect2 = o.getPokers().stream().map(p -> p.getNumber()).collect(Collectors.groupingBy(s -> s));
-            List<Integer> pairs =  collect.keySet().stream()
-                    .sorted((p1, p2) -> collect.get(p1).size() - collect.get(p2).size())
-                    .collect(Collectors.toList());
-            List<Integer> pairs2 = collect2.keySet().stream()
-                    .sorted((p1, p2) -> collect2.get(p1).size() - collect2.get(p2).size())
-                    .collect(Collectors.toList());
-            for (int i=2; i >= 0; i--) {
-                if (pairs.get(i) > pairs2.get(i)) {
-                    return 1;
-                } else if (pairs.get(i) < pairs2.get(i)) {
-                    return -1;
+            for (int i=0; i<pairs.size(); i++) {
+                if (pairs.get(i) != pairs2.get(i)) {
+                    return pairs.get(i).compareTo(pairs2.get(i));
                 }
             }
             return 0;
         }
         return 0;
+    }
+
+    private List<Integer> getWeightList() {
+        Map<Integer, List<Integer>> collect = pokers.stream().map(p -> p.getNumber()).collect(Collectors.groupingBy(s -> s));
+        return collect.keySet().stream()
+                .sorted((p1, p2) -> -(collect.get(p1).size() - collect.get(p2).size()))
+                .collect(Collectors.toList());
     }
 
     public List<Poker> getPokers() {
